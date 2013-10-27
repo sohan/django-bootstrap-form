@@ -1,29 +1,41 @@
 {% load bootstrap %}
-<div class="control-group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %} control-group-{{ field.name }}">
+
+<div class="form-group{% if field.errors %} has-error{% endif %} form-group-{{field.name}}">
     {% if field|is_checkbox %}
-                <div class="controls">
-                    <label class="checkbox">
-                        {{ field }} <span>{{ field.label }}</span>
-                    </label>
+        <div class="{{ classes.single_value }}">
+            <div class="checkbox">
+                {% if field.auto_id %}
+                <label>
+                    {{ field }} <span>{{ field.label }}</span>
+                </label>
+                {% endif %}
+                {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
 
-                    {% for error in field.errors %}
-                        <span class="help-inline">{{ error }}</span>
-                    {% endfor %}
-
-                    {% if field.help_text %}
+                {% if field.help_text %}
                     <p class="help-block">
                         {{ field.help_text|safe }}
                     </p>
-                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% else %}{% if field|is_radio %}
+        {% if field.auto_id %}
+            <label class="control-label {{ classes.label }}">{{ field.label }}</label>
+        {% endif %}
+        <div class="{{ classes.value }}">
+            {% for choice in field %}
+                <div class="radio">
+                    <label>
+                        {{ choice.tag }}
+                        {{ choice.choice_label }}
+                    </label>
                 </div>
-    {% else %}
-        <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
-
-        <div class="controls">
-            {{ field }}
+            {% endfor %}
 
             {% for error in field.errors %}
-                <span class="help-inline">{{ error }}</span>
+                <span class="help-block">{{ error }}</span>
             {% endfor %}
 
             {% if field.help_text %}
@@ -31,7 +43,24 @@
                 {{ field.help_text|safe }}
             </p>
             {% endif %}
-
         </div>
-    {% endif %}
+
+    {% else %}
+        {% if field.auto_id %}
+            <label class="control-label {{ classes.label }}" for="{{ field.auto_id }}">{{ field.label }}</label>
+        {% endif %}
+        <div class="{{ classes.value }}">
+            {{ field }}
+
+            {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+                {% endfor %}
+
+            {% if field.help_text %}
+                <p class="help-block">
+                    {{ field.help_text|safe }}
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}{% endif %}
 </div>

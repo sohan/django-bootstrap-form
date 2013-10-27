@@ -4,33 +4,27 @@ Django bootstrap form
 
 Generate twitter-bootstrap form output for django form
 
-A django template tag to work with twitter bootstrap ( http://twitter.github.com/bootstrap/ )
+A simple Django template tag to work with twitter bootstrap ( http://twitter.github.com/bootstrap/ )
+
+**Now support for Bootstrap 3!**
+
+`Read the Docs <https://django-bootstrap-form.readthedocs.org/en/latest/>`_
 
 
-Installation
-============
+CHANGELOG
+---------
+
+- 2013-8-27:
+
+  Add support for Bootstrap 3, contributed by `Nivl <https://github.com/Nivl>`_
 
 
-``$ pip install django-bootstrap-form``
+- 2013-5-7:
+
+  Add `radio` support for ChoiceField
 
 
-for people who still use older version before twitter bootstrap 2.0
+.. image:: https://d2weczhvl823v0.cloudfront.net/tzangms/django-bootstrap-form/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
 
-``$ pip install django-bootstrap-form==0.2``
-
-
-
-Configuration
-==============
-
-Add 'bootstrapform' to INSTALLED_APPS.
-
-
-Usage
-=====
-
-{% load bootstrap %}
-
-{{ form|bootstrap }}
-
-{{ form.<field name>|bootstrap }} - To output individual fields
